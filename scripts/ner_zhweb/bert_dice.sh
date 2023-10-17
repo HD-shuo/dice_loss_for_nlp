@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 
-FILE_NAME=reproduce_zhmsra_dice
+FILE_NAME=reproduce_zhweb_dice
 REPO_PATH=/home/daixingshuo/dice_loss_for_NLP
 MODEL_SCALE=base
-DATA_DIR=/home/daixingshuo/dice_loss_for_NLP/dataset/msra
+DATA_DIR=/home/daixingshuo/dice_loss_for_NLP/dataset/web
 BERT_DIR=/home/daixingshuo/dice_loss_for_NLP/BERT_DIR/chinese_L-12_H-768_A-12
 
-TRAIN_BATCH_SIZE=10
+TRAIN_BATCH_SIZE=24
 EVAL_BATCH_SIZE=1
 MAX_LENGTH=275
 
@@ -46,12 +46,12 @@ elif [[ ${LOSS_TYPE} == "dice" ]]; then
 fi
 echo "DEBUG INFO -> loss sign is ${LOSS_SIGN}"
 
-OUTPUT_BASE_DIR=/home/daixingshuo/dice_loss_for_NLP/outputs/dice_loss/mrc_ner
+OUTPUT_BASE_DIR=/home/daixingshuo/dice_loss_for_NLP/outputs/dice_loss/web_ner
 OUTPUT_DIR=${OUTPUT_BASE_DIR}/${FILE_NAME}_${MODEL_SCALE}_${TRAIN_BATCH_SIZE}_${MAX_LENGTH}_${LR}_${LR_SCHEDULE}_${BERT_DROPOUT}_${ACC_GRAD}_${MAX_EPOCH}_${GRAD_CLIP}_${WEIGHT_DECAY}_${WARMUP_PROPORTION}_${W_START}_${W_END}_${W_SPAN}_${LOSS_SIGN}
 
 mkdir -p ${OUTPUT_DIR}
 
-CUDA_VISIBLE_DEVICES=1 python ${REPO_PATH}/tasks/mrc_ner/train.py \
+CUDA_VISIBLE_DEVICES=1 python ${REPO_PATH}/tasks/web_ner/train.py \
 --gpus="1" \
 --precision=${PRECISION} \
 --train_batch_size ${TRAIN_BATCH_SIZE} \
@@ -88,4 +88,4 @@ CUDA_VISIBLE_DEVICES=1 python ${REPO_PATH}/tasks/mrc_ner/train.py \
 --pred_answerable "train_infer" \
 --answerable_task_ratio 0.3 \
 --activate_func relu \
---data_sign en_conll03
+--data_sign zh_web

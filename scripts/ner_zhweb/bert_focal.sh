@@ -2,35 +2,35 @@
 # -*- coding: utf-8 -*-
 
 
-FILE_NAME=reproduce_zhmsra_dice
-REPO_PATH=/home/daixingshuo/dice_loss_for_NLP
+FILE_NAME=brain_zhmsra_focal
+REPO_PATH=/userhome/xiaoya/dice_loss_for_NLP
 MODEL_SCALE=base
-DATA_DIR=/home/daixingshuo/dice_loss_for_NLP/dataset/msra
-BERT_DIR=/home/daixingshuo/dice_loss_for_NLP/BERT_DIR/chinese_L-12_H-768_A-12
+DATA_DIR=/userhome/xiaoya/dataset/mrc_ner/new_msra
+BERT_DIR=/userhome/xiaoya/bert/chinese_bert
 
-TRAIN_BATCH_SIZE=10
+TRAIN_BATCH_SIZE=9
 EVAL_BATCH_SIZE=1
 MAX_LENGTH=275
 
 OPTIMIZER=torch.adam
-LR_SCHEDULE=polydecay
-LR=2e-5
+LR_SCHEDULE=linear
+LR=1e-5
 
 BERT_DROPOUT=0.1
 ACC_GRAD=3
 MAX_EPOCH=5
 GRAD_CLIP=1.0
 WEIGHT_DECAY=0.002
-WARMUP_PROPORTION=0.02
+WARMUP_PROPORTION=0.08
 
-LOSS_TYPE=dice
+LOSS_TYPE=focal
 W_START=1
 W_END=1
-W_SPAN=0.2
+W_SPAN=0.3
 DICE_SMOOTH=1
-DICE_OHEM=0.3
+DICE_OHEM=0.4
 DICE_ALPHA=0.01
-FOCAL_GAMMA=2
+FOCAL_GAMMA=3
 
 PRECISION=16
 PROGRESS_BAR=1
@@ -46,7 +46,7 @@ elif [[ ${LOSS_TYPE} == "dice" ]]; then
 fi
 echo "DEBUG INFO -> loss sign is ${LOSS_SIGN}"
 
-OUTPUT_BASE_DIR=/home/daixingshuo/dice_loss_for_NLP/outputs/dice_loss/mrc_ner
+OUTPUT_BASE_DIR=/userhome/xiaoya/outputs/dice_loss/mrc_ner
 OUTPUT_DIR=${OUTPUT_BASE_DIR}/${FILE_NAME}_${MODEL_SCALE}_${TRAIN_BATCH_SIZE}_${MAX_LENGTH}_${LR}_${LR_SCHEDULE}_${BERT_DROPOUT}_${ACC_GRAD}_${MAX_EPOCH}_${GRAD_CLIP}_${WEIGHT_DECAY}_${WARMUP_PROPORTION}_${W_START}_${W_END}_${W_SPAN}_${LOSS_SIGN}
 
 mkdir -p ${OUTPUT_DIR}
@@ -75,17 +75,14 @@ CUDA_VISIBLE_DEVICES=1 python ${REPO_PATH}/tasks/mrc_ner/train.py \
 --weight_start ${W_START} \
 --weight_end ${W_END} \
 --weight_span ${W_SPAN} \
---dice_smooth ${DICE_SMOOTH} \
---dice_ohem ${DICE_OHEM} \
---dice_alpha ${DICE_ALPHA} \
---dice_square \
+--focal_gamma ${FOCAL_GAMMA} \
 --warmup_proportion ${WARMUP_PROPORTION} \
 --span_loss_candidates gold_pred_random \
---construct_entity_span start_and_end \
+--construct_entity_span start_end_match \
 --num_labels 1 \
 --flat_ner \
 --is_chinese \
 --pred_answerable "train_infer" \
---answerable_task_ratio 0.3 \
+--answerable_task_ratio 0.2 \
 --activate_func relu \
---data_sign en_conll03
+--data_sign zh_msra

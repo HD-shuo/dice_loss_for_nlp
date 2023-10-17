@@ -3,10 +3,8 @@
 
 # file: train.py
 #
-
+import ipdb 
 import os
-import sys
-sys.path.append('/home/daixingshuo/dice_loss_for_NLP/')
 import re
 import argparse
 import logging
@@ -26,7 +24,7 @@ from pytorch_lightning.callbacks.model_checkpoint import ModelCheckpoint
 
 from loss.focal_loss import FocalLoss
 from loss.dice_loss import DiceLoss
-from datasets.mrc_ner_dataset import MRCNERDataset
+from datasets.web_ner_dataset import WEBNERDataset
 from datasets.truncate_dataset import TruncateDataset
 from datasets.collate_functions import collate_to_max_length
 from metrics.mrc_ner_span_f1 import MRCNERSpanF1
@@ -454,8 +452,8 @@ class BertForNERTask(pl.LightningModule):
         return self.get_dataloader(prefix="test")
 
     def get_dataloader(self, prefix="train", limit: int = None):
-        json_path = os.path.join(self.data_dir, f"mrc-ner.{prefix}")
-        dataset = MRCNERDataset(json_path=json_path,
+        json_path = os.path.join(self.data_dir, f"web-ner.{prefix}")
+        dataset = WEBNERDataset(json_path=json_path,
                                 tokenizer=self.tokenizer,
                                 max_length=self.args.max_length,
                                 possible_only=self.args.answerable_only,
@@ -474,7 +472,6 @@ class BertForNERTask(pl.LightningModule):
             # cannot use random data sampler since the gradient may explode.
             data_generator = torch.Generator()
             data_generator.manual_seed(self.args.seed)
-            print(data_generator)
             data_sampler = RandomSampler(dataset, generator=data_generator)
         else:
             data_sampler = SequentialSampler(dataset)

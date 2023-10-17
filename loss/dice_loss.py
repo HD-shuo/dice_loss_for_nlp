@@ -10,6 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch import Tensor
 from typing import Optional
+import pdb
 
 
 class DiceLoss(nn.Module):
@@ -172,7 +173,13 @@ class DiceLoss(nn.Module):
 
             neg_scores = torch.masked_select(flat_input, neg_example.bool())
             neg_scores_sort, _ = torch.sort(neg_scores, )
+            # 在进行训练时出现了neg_scores_sort为空的情况，于是人为给这种情况下的threshold进行了赋值
+            #if len(neg_scores_sort) > 0:
+            #if len(neg_scores_sort) == 0:
+                #pdb.set_trace()
             threshold = neg_scores_sort[-keep_num+1]
+            #else:
+                #threshold = 0.0
             cond = (flat_input > threshold) | pos_example.view(-1)
             ohem_mask = torch.where(cond, 1, 0)
             flat_input = flat_input * ohem_mask

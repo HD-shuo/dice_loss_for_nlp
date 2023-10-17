@@ -1,0 +1,110 @@
+[
+  [
+    {
+      "context": "公司新闻 - 新闻动态 - 芜湖通和汽车流体系统有限公司",
+      "end_position": [
+        28
+      ],
+      "entity_label": "企业名称",
+      "impossible": "False",
+      "qas_id": "0.0",
+      "query": null,
+      "span_position": [
+        "14;28"
+      ],
+      "start_position": [
+        14
+      ]
+    },
+    {
+      "context": "公司新闻 - 新闻动态 - 芜湖通和汽车流体系统有限公司",
+      "end_position": [],
+      "entity_label": "联系电话",
+      "impossible": "True",
+      "qas_id": "0.1",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    },
+    {
+      "context": "公司新闻 - 新闻动态 - 芜湖通和汽车流体系统有限公司",
+      "end_position": [],
+      "entity_label": "动态信息标题",
+      "impossible": "True",
+      "qas_id": "0.2",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    }
+  ],
+  [
+    {
+      "context": "欢迎来到芜湖通和汽车流体系统有限公司",
+      "end_position": [
+        17
+      ],
+      "entity_label": "企业名称",
+      "impossible": "False",
+      "qas_id": "1.0",
+      "query": null,
+      "span_position": [
+        "4;17"
+      ],
+      "start_position": [
+        4
+      ]
+    },
+    {
+      "context": "欢迎来到芜湖通和汽车流体系统有限公司",
+      "end_position": [],
+      "entity_label": "联系电话",
+      "impossible": "True",
+      "qas_id": "1.1",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    },
+    {
+      "context": "欢迎来到芜湖通和汽车流体系统有限公司",
+      "end_position": [],
+      "entity_label": "动态信息标题",
+      "impossible": "True",
+      "qas_id": "1.2",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    }
+  ],
+  [
+    {
+      "context": "中文",
+      "end_position": [],
+      "entity_label": "企业名称",
+      "impossible": null,
+      "qas_id": "2.0",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    },
+    {
+      "context": "中文",
+      "end_position": [],
+      "entity_label": "联系电话",
+      "impossible": null,
+      "qas_id": "2.1",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    },
+    {
+      "context": "中文",
+      "end_position": [],
+      "entity_label": "动态信息标题",
+      "impossible": null,
+      "qas_id": "2.2",
+      "query": null,
+      "span_position": [],
+      "start_position": []
+    }
+  ]
+]

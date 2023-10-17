@@ -144,15 +144,14 @@ def transform_examples_to_qa_features(query_map, entity_labels, data_instances, 
 
 
 if __name__ == "__main__":
-    source_file_path = "/data/xiaoya/datasets/ner/conll2003_truecase/valid.txt"
-    target_file_path = "/data/xiaoya/datasets/mrc_ner/en_conll03_truecase_doc/mrc-ner.dev"
-    # generate_query_ner_dataset(source_file_path, target_file_path, entity_sign="flat_enconll03_document", dataset_name="en_conll03", query_sign="default")
+    source_file_path = "/home/daixingshuo/dice_loss_for_NLP/dataset/msra/test.txt"
+    target_file_path = "/home/daixingshuo/dice_loss_for_NLP/dataset/msra/mrc-ner.dev"
+    generate_query_ner_dataset(source_file_path, target_file_path, entity_sign="flat", dataset_name="en_conll03", query_sign="default")
 
     source_file_path = "/data/xiaoya/datasets/ner/conll2003_truecase/train.txt"
     target_file_path = "/data/xiaoya/datasets/mrc_ner/en_conll03_truecase_sent/mrc-ner.train"
     # generate_query_ner_dataset(source_file_path, target_file_path, entity_sign="flat_enconll03_sentences", dataset_name="en_conll03", query_sign="default")
 
-    source_file_path = "/data/xiaoya/datasets/ner/conll2003/eng.train"
-    target_file_path = "/data/xiaoya/datasets/mrc_ner/en_conll03_doc/mrc-ner.train"
-    generate_query_ner_dataset(source_file_path, target_file_path, entity_sign="flat_enconll03_docs",
-                               dataset_name="en_conll03", query_sign="default")
+    source_file_path = "/home/daixingshuo/dice_loss_for_NLP/dataset/msra/train.txt"
+    target_file_path = "/home/daixingshuo/dice_loss_for_NLP/dataset/msra/mrc-ner.train"
+    # generate_query_ner_dataset(source_file_path, target_file_path, entity_sign="flat",dataset_name="en_conll03", query_sign="default")

@@ -50,8 +50,10 @@ class BertForQueryNER(BertPreTrainedModel):
             match_logits: start-end-match probs of shape [batch, seq_len, seq_len]
         """
 
+        # 使用BERT对输入序列进行编码，得到隐层表示
         bert_outputs = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
 
+        #获取编码后的序列隐层表示和[CLS]对应位置的向量
         sequence_heatmap = bert_outputs[0]  # [batch, seq_len, hidden]
         sequence_cls = bert_outputs[1]
 
