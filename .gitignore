@@ -122,3 +122,8 @@ venv.bak/
 
 # mac book
 .DS_Store
+
+# costum user
+/dataset
+/outputs
+/BERT_DIR
